@@ -9,8 +9,8 @@ shinyUI(fluidPage(
     h5('Questions'),
     p(em('values go from 0(low) to 10 (high)')),
     sliderInput('tannin', 'How much tannins do you see ?',value = 5, min = 0, max = 10, step = 0.005,),
-    sliderInput('odor', 'How intense is the odor ?',value = 5, min = 0, max = 10, step = 0.005,),
-    sliderInput('aroma', 'How intense are the aroma ?',value = 5, min = 0, max = 10, step = 0.005,),
+    sliderInput('spice', 'Do you smell spices ?',value = 5, min = 0, max = 10, step = 0.005,),
+    sliderInput('aroma', 'How intense are the aromas ?',value = 5, min = 0, max = 10, step = 0.005,),
     submitButton('Submit')
   ),
   mainPanel(

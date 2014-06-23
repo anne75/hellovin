@@ -5,16 +5,16 @@ library("ggmap")
 library("tree")
 library("mapproj")
 
-f.whichwine<-function(odor, aroma,tannin){
-  vin<-wine[,c(1,3,4,17)]
-  names(vin)<-c("label","odor","aroma","tannin")
+f.whichwine<-function(spice, aroma,tannin){
+  vin<-wine[,c(1,4,7,17)]
+  names(vin)<-c("label","aroma","spice", "tannin")
   levels(vin$label)<-c("Saumur","Bourgueil", "Chinon") #fix a syntax error
-  vintree<-tree(label~., data=vin)
+  vintree<-tree(label~., data=vin, control=tree.control(minsize = 1, nobs=21) )
   f.scale<-function(x,y) {
     x<-(min(y)+x*(max(y)-min(y))/10)
     return(x)
   }
-  newdata<-data.frame("odor"=f.scale(odor,vin$odor),"aroma"=f.scale(aroma,vin$aroma),
+  newdata<-data.frame("spice"=f.scale(spice,vin$spice),"aroma"=f.scale(aroma,vin$aroma),
                       "tannin"=f.scale(tannin,vin$tannin))
   return(as.character(predict(vintree,newdata, type="class")))
 }
@@ -23,7 +23,7 @@ shinyServer(
     
   function(input, output) {
     
-    temp1<-reactive(f.whichwine(input$odor, input$aroma, input$tannin))
+    temp1<-reactive(f.whichwine(input$spice, input$aroma, input$tannin))
     
     output$aoc <- renderPrint({temp1()
     })
