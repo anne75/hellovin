@@ -1,4 +1,4 @@
-data("wine",package="FactoMineR")
+load("wine")
 load("map_df")
 load("bkgd_map")
 library("ggmap")
