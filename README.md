@@ -1,4 +1,4 @@
 hellovin
 ========
 
-Coursera data product project
+This folder contains the files and folders required by the coursera data product course.
